@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue2.6.10.js"></script>
+</head>
+<body>
+<div id="demo">
+
+    <my-button></my-button>
+
+</div>
+<script>
+    var myButton = {
+        template:`<div><button @click="hand">-</button><input type="text" v-model="count" @change="bang"><button @click="handleClick">+</button>
+</div>`,
+        data(){
+            return {
+                count:1,
+                mobile: '数量为1，不能再减'
+            }
+        },
+
+        methods:{
+            handleClick(){
+                this.count++;
+            },
+            hand(){
+                if(this.count<=1) {
+                    this.count = 1
+                    confirm(this.mobile)
+                } else {
+                    this.count --
+                }
+            },
+            bang(){
+                var num = /^[0-9]+$/
+                var ss=num.test(this.count)
+                console.log(ss)
+                if(this.count<0 || !ss){
+                    alert("输入的数据不合法")
+                    this.count=1
+                }
+            }
+
+        }
+
+    }
+    new Vue({
+        el:'#demo',
+        components:{
+            'my-button':myButton
+
+        }
+
+    })
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
